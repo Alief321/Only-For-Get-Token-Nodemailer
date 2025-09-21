@@ -5,12 +5,13 @@ dotenv.config();
 
 const GOOGLE_PROVIDER_CLIENT_ID = process.env.GOOGLE_PROVIDER_CLIENT_ID;
 const GOOGLE_PROVIDER_CLIENT_SECRET = process.env.GOOGLE_PROVIDER_CLIENT_SECRET;
+const REDIRECT_URI = process.env.REDIRECT_URI;
 
 if (!GOOGLE_PROVIDER_CLIENT_ID || !GOOGLE_PROVIDER_CLIENT_SECRET) {
   throw new Error('Missing Google OAuth2 client ID or client secret in environment variables.');
 }
 
-const oauth2Client = new google.auth.OAuth2(GOOGLE_PROVIDER_CLIENT_ID, GOOGLE_PROVIDER_CLIENT_SECRET, 'http://localhost:3000/api/admin/oauth/callback/google');
+const oauth2Client = new google.auth.OAuth2(GOOGLE_PROVIDER_CLIENT_ID, GOOGLE_PROVIDER_CLIENT_SECRET, REDIRECT_URI);
 
 // URL untuk authorize akses Gmail
 const authUrl = oauth2Client.generateAuthUrl({
